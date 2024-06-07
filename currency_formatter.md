@@ -4,8 +4,8 @@ Notion formula to format a number to INR (Indian Rupee) currency format.
 
 ## Examples
 
-- Input: `1000` -> Output: `₹1,000/-`
-- Input: `10000` -> Output: `₹10,000/-`
+- If amount is `1000`, the output will be `₹1,000/-`
+- If amount is `10000`, the output will be `₹10,000/-`
 
 ## Formula
 

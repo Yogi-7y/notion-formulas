@@ -4,10 +4,8 @@ Returns the date where the start date is the first day of the month irrespective
 
 ## Example
 
-| Input      | Output     |
-| ---------- | ---------- |
-| 2024-01-15 | 2024-01-01 |
-| 2024-12-31 | 2024-12-01 |
+- If today's date is `2024-01-15`, the output will be `2024-01-01`.
+- If today's date is `2024-12-31`, the output will be `2024-12-01`.
 
 ## Formula
 
@@ -22,10 +20,8 @@ Returns the date where the end date is the last day of the month irrespective of
 
 ## Example
 
-| Input      | Output     |
-| ---------- | ---------- |
-| 2024-01-15 | 2024-01-31 |
-| 2024-12-31 | 2024-12-31 |
+- If today's date is `2024-01-15`, the output will be `2024-01-31`.
+- If today's date is `2024-12-31`, the output will be `2024-12-31`.
 
 ## Formula
 
