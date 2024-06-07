@@ -11,7 +11,7 @@ Notion formula to format a number to INR (Indian Rupee) currency format.
 
 ```plain text
 lets(
-	amount,
+	amount, /* Input amount here */
 	10000,
 
 	amountInString,
