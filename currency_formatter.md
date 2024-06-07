@@ -24,7 +24,6 @@ lets(
 	amount >= 1000 and amount <= 9999,
 
 	formatSingleDigitThousand,
-	/*join([substring(amountInString, 0, 1), substring(amountInString, 1)], ","),*/
 	amountInString.substring(0,1) + "," + amountInString.substring(1),
 
 	isInDoubleDigitThousand,
