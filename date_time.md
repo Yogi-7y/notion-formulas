@@ -11,7 +11,6 @@ Returns the date where the start date is the first day of the month irrespective
 
 ```
 now().formatDate("YYYY-MM-01").parseDate()
-
 ```
 
 # End of Month
@@ -43,9 +42,9 @@ lets(
 				? 30
 				: (isLeapYear ? 29 : 28)),
 
-		lastDate,
-		now().formatDate("YYYY-MM-" + lastDateNumber).parseDate(),
+	lastDate,
+	now().formatDate("YYYY-MM-" + lastDateNumber).parseDate(),
 
-		lastDate
+	lastDate
 	)
 ```
