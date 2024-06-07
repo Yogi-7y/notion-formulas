@@ -12,10 +12,10 @@ Notion formula to format a number to INR (Indian Rupee) currency format.
 ```
 lets(
 	amount, /* Input amount here */
-	10000,
+	1000,
 
 	amountInString,
-	format(amount),
+	amount.format(),
 
 	isBelowThousand,
 	amount < 1000,
@@ -24,13 +24,14 @@ lets(
 	amount >= 1000 and amount <= 9999,
 
 	formatSingleDigitThousand,
-	join([substring(amountInString, 0, 1), substring(amountInString, 1)], ","),
+	/*join([substring(amountInString, 0, 1), substring(amountInString, 1)], ","),*/
+	amountInString.substring(0,1) + "," + amountInString.substring(1),
 
 	isInDoubleDigitThousand,
 	amount >= 10000 and amount <=99999,
 
 	formatDoubleDigitThousand,
-	join([substring(amountInString, 0, 2), substring(amountInString, 2)], ","),
+	amountInString.substring(0, 2) + "," + amountInString.substring(2),
 
 	displayAmount,
 	ifs(
