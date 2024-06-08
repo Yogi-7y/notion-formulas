@@ -46,5 +46,5 @@ lets(
 	now().formatDate("YYYY-MM-" + lastDateNumber).parseDate(),
 
 	lastDate
-	)
+)
 ```
