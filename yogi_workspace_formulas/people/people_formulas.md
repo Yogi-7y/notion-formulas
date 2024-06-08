@@ -11,50 +11,50 @@ Display Format: `CM: 15,000/- (Food: 5,000/-)`
 ```
 lets(
     numberOfMonthsToSubtract, /* helps to define the period */
-	0,
+    0,
 
-	/* Get start and end date */
-	startDate,
-	now().dateSubtract(numberOfMonthsToSubtract, "months").formatDate("YYYY-MM-01").parseDate(),
+    /* Get start and end date */
+    startDate,
+    now().dateSubtract(numberOfMonthsToSubtract, "months").formatDate("YYYY-MM-01").parseDate(),
 
-	endDate,
-	lets(
-		month,
-		now().month(),
+    endDate,
+    lets(
+        month,
+        now().month(),
 
-		year,
-		now().year(),
+        year,
+        now().year(),
 
-		isLeapYear,
-		(year.mod(4) == 0 and year.mod(100) != 0) or (year.mod(400) == 0),
+        isLeapYear,
+        (year.mod(4) == 0 and year.mod(100) != 0) or (year.mod(400) == 0),
 
-		lastDateNumber,
-		month.mod(2) != 0
-				? 31
-				: ((month != 2)
-					? 30
-					: (isLeapYear ? 29 : 28)),
+        lastDateNumber,
+        month.mod(2) != 0
+                ? 31
+                : ((month != 2)
+                    ? 30
+                    : (isLeapYear ? 29 : 28)),
 
-		lastDate,
-		now().formatDate("YYYY-MM-" + lastDateNumber).parseDate(),
+        lastDate,
+        now().formatDate("YYYY-MM-" + lastDateNumber).parseDate(),
 
-		lastDate
-	),
+        lastDate
+    ),
 
-	/* All the cashflow entries for the above defined time period */
-	filteredCashflow,
+    /* All the cashflow entries for the above defined time period */
+    filteredCashflow,
     prop("Cashflow")
-	.filter(current.prop("Date") >= startDate and current.prop("Date") <= endDate),
+    .filter(current.prop("Date") >= startDate and current.prop("Date") <= endDate),
 
-	/* List of categories from Cashflow Area database*/
-	kCategories,
-	[
-		"Bills",
+    /* List of categories from Cashflow Area database*/
+    kCategories,
+    [
+        "Bills",
         "Career & Education",
         "Daily Commute",
         "Entertainment",
         "Fashion & Accessories",
-		"Food & Dining",
+        "Food & Dining",
         "Getaways & Vacations",
         "Health & Fitness",
         "Home Maintenance",
@@ -63,134 +63,134 @@ lets(
         "Miscellaneous",
         "Personal Care",
         "Purchases & Acquisitions",
-		"Religious",
+        "Religious",
         "Repayments & Debts"
-	],
+    ],
 
-	/* Getting Amount for each category */
-	categoryAmounts,
-	kCategories
-	.map(
-		lets(
-			categoryName,
-			current,
+    /* Getting Amount for each category */
+    categoryAmounts,
+    kCategories
+    .map(
+        lets(
+            categoryName,
+            current,
 
-			categoryCashflow,
-			filteredCashflow
-			.filter(current.prop("Area's Parent").format() == categoryName),
+            categoryCashflow,
+            filteredCashflow
+            .filter(current.prop("Area's Parent").format() == categoryName),
 
-			categoryCashflowAmountList,
-			categoryCashflow
-			.map(current.prop("Amount")),
+            categoryCashflowAmountList,
+            categoryCashflow
+            .map(current.prop("Amount")),
 
-			sum,
-			categoryCashflowAmountList.sum(),
+            sum,
+            categoryCashflowAmountList.sum(),
 
-			sum
-		)
-	),
+            sum
+        )
+    ),
 
-	maxAmountForACategory, /* Max amount spent on a category */
-	categoryAmounts.max(),
+    maxAmountForACategory, /* Max amount spent on a category */
+    categoryAmounts.max(),
 
-	maxAmountIndex, /* Index of max amount */
-	categoryAmounts.findIndex(current == maxAmountForACategory),
+    maxAmountIndex, /* Index of max amount */
+    categoryAmounts.findIndex(current == maxAmountForACategory),
 
-	topCategory, /* Category name which has max expense */
-	kCategories.at(maxAmountIndex),
+    topCategory, /* Category name which has max expense */
+    kCategories.at(maxAmountIndex),
 
-	totalSpent, /* total spent in the given period */
-	filteredCashflow.map(current.prop("Expense Amount")).sum(),
+    totalSpent, /* total spent in the given period */
+    filteredCashflow.map(current.prop("Expense Amount")).sum(),
 
 
-	/* Formatting Amount in INR */
-	formattedAmountInInr,
-	lets(
-		amount,
-		maxAmountForACategory,
+    /* Formatting Amount in INR */
+    formattedAmountInInr,
+    lets(
+        amount,
+        maxAmountForACategory,
 
-		amountInString,
-		amount.format(),
+        amountInString,
+        amount.format(),
 
-		isBelowThousand,
-		amount < 1000,
+        isBelowThousand,
+        amount < 1000,
 
-		isInSingleDigitThousand,
-		amount >= 1000 and amount <= 9999,
+        isInSingleDigitThousand,
+        amount >= 1000 and amount <= 9999,
 
-		formatSingleDigitThousand,
-		amountInString.substring(0,1) + "," + amountInString.substring(1),
+        formatSingleDigitThousand,
+        amountInString.substring(0,1) + "," + amountInString.substring(1),
 
-		isInDoubleDigitThousand,
-		amount >= 10000 and amount <=99999,
+        isInDoubleDigitThousand,
+        amount >= 10000 and amount <=99999,
 
-		formatDoubleDigitThousand,
-		amountInString.substring(0, 2) + "," + amountInString.substring(2),
+        formatDoubleDigitThousand,
+        amountInString.substring(0, 2) + "," + amountInString.substring(2),
 
-		displayAmount,
-		ifs(
-			isBelowThousand,
-			amount,
-			isInSingleDigitThousand,
-			formatSingleDigitThousand,
-			isInDoubleDigitThousand,
-			formatDoubleDigitThousand,
-			amount
-		),
+        displayAmount,
+        ifs(
+            isBelowThousand,
+            amount,
+            isInSingleDigitThousand,
+            formatSingleDigitThousand,
+            isInDoubleDigitThousand,
+            formatDoubleDigitThousand,
+            amount
+        ),
 
-		amountWithRupee,
-		"₹" + displayAmount + "/-",
+        amountWithRupee,
+        "₹" + displayAmount + "/-",
 
-		amountWithRupee
-	),
+        amountWithRupee
+    ),
 
-	totalSpentInInr, /* Total spent in INR */
-	lets(
-		amount,
-		totalSpent,
+    totalSpentInInr, /* Total spent in INR */
+    lets(
+        amount,
+        totalSpent,
 
-		amountInString,
-		amount.format(),
+        amountInString,
+        amount.format(),
 
-		isBelowThousand,
-		amount < 1000,
+        isBelowThousand,
+        amount < 1000,
 
-		isInSingleDigitThousand,
-		amount >= 1000 and amount <= 9999,
+        isInSingleDigitThousand,
+        amount >= 1000 and amount <= 9999,
 
-		formatSingleDigitThousand,
-		amountInString.substring(0,1) + "," + amountInString.substring(1),
+        formatSingleDigitThousand,
+        amountInString.substring(0,1) + "," + amountInString.substring(1),
 
-		isInDoubleDigitThousand,
-		amount >= 10000 and amount <=99999,
+        isInDoubleDigitThousand,
+        amount >= 10000 and amount <=99999,
 
-		formatDoubleDigitThousand,
-		amountInString.substring(0, 2) + "," + amountInString.substring(2),
+        formatDoubleDigitThousand,
+        amountInString.substring(0, 2) + "," + amountInString.substring(2),
 
-		displayAmount,
-		ifs(
-			isBelowThousand,
-			amount,
-			isInSingleDigitThousand,
-			formatSingleDigitThousand,
-			isInDoubleDigitThousand,
-			formatDoubleDigitThousand,
-			amount
-		),
+        displayAmount,
+        ifs(
+            isBelowThousand,
+            amount,
+            isInSingleDigitThousand,
+            formatSingleDigitThousand,
+            isInDoubleDigitThousand,
+            formatDoubleDigitThousand,
+            amount
+        ),
 
-		amountWithRupee,
-		"₹" + displayAmount + "/-",
+        amountWithRupee,
+        "₹" + displayAmount + "/-",
 
-		amountWithRupee
-	),
+        amountWithRupee
+    ),
 
-	monthNameShort,
-	now().formatDate("MMM"),
+    monthNameShort,
+    now().formatDate("MMM"),
 
-	displayText,
-	(monthNameShort + ": " + totalSpentInInr + " (" + topCategory + ": " + formattedAmountInInr + ")").style("b", "purple"),
+    displayText,
+    (monthNameShort + ": " + totalSpentInInr + " (" + topCategory + ": " + formattedAmountInInr + ")").style("b", "purple"),
 
-	displayText
+    displayText
 )
 ```
 
