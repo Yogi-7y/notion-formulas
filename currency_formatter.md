@@ -11,41 +11,41 @@ Notion formula to format a number to INR (Indian Rupee) currency format.
 
 ```
 lets(
-	amount, /* Input amount here */
-	1000,
+  amount, /* Input amount here */
+  1000,
 
-	amountInString,
-	amount.format(),
+  amountInString,
+  amount.format(),
 
-	isBelowThousand,
-	amount < 1000,
+  isBelowThousand,
+  amount < 1000,
 
-	isInSingleDigitThousand,
-	amount >= 1000 and amount <= 9999,
+  isInSingleDigitThousand,
+  amount >= 1000 and amount <= 9999,
 
-	formatSingleDigitThousand,
-	amountInString.substring(0,1) + "," + amountInString.substring(1),
+  formatSingleDigitThousand,
+  amountInString.substring(0,1) + "," + amountInString.substring(1),
 
-	isInDoubleDigitThousand,
-	amount >= 10000 and amount <=99999,
+  isInDoubleDigitThousand,
+  amount >= 10000 and amount <=99999,
 
-	formatDoubleDigitThousand,
-	amountInString.substring(0, 2) + "," + amountInString.substring(2),
+  formatDoubleDigitThousand,
+  amountInString.substring(0, 2) + "," + amountInString.substring(2),
 
-	displayAmount,
-	ifs(
-		isBelowThousand,
-		amount,
-		isInSingleDigitThousand,
-		formatSingleDigitThousand,
-		isInDoubleDigitThousand,
-		formatDoubleDigitThousand,
-		amount
-	),
+  displayAmount,
+  ifs(
+    isBelowThousand,
+    amount,
+    isInSingleDigitThousand,
+    formatSingleDigitThousand,
+    isInDoubleDigitThousand,
+    formatDoubleDigitThousand,
+    amount
+  ),
 
-	amountWithRupee,
-	"₹" + displayAmount + "/-",
+  amountWithRupee,
+  "₹" + displayAmount + "/-",
 
-	amountWithRupee
+  amountWithRupee
 )
 ```
