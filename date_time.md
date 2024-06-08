@@ -26,25 +26,25 @@ Returns the date where the end date is the last day of the month irrespective of
 
 ```
 lets(
-	month,
-	now().month(),
+  month,
+  now().month(),
 
-	year,
-	now().year(),
+  year,
+  now().year(),
 
-	isLeapYear,
-	(year.mod(4) == 0 and year.mod(100) != 0) or (year.mod(400) == 0),
+  isLeapYear,
+  (year.mod(4) == 0 and year.mod(100) != 0) or (year.mod(400) == 0),
 
-	lastDateNumber,
-	month.mod(2) != 0
-			? 31
-			: ((month != 2)
-				? 30
-				: (isLeapYear ? 29 : 28)),
+  lastDateNumber,
+  month.mod(2) != 0
+      ? 31
+      : ((month != 2)
+        ? 30
+        : (isLeapYear ? 29 : 28)),
 
-	lastDate,
-	now().formatDate("YYYY-MM-" + lastDateNumber).parseDate(),
+  lastDate,
+  now().formatDate("YYYY-MM-" + lastDateNumber).parseDate(),
 
-	lastDate
+  lastDate
 )
 ```
