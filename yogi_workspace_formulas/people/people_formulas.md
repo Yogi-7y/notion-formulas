@@ -10,7 +10,7 @@ Display Format: `CM: 15,000/- (Food: 5,000/-)`
 
 ```
 lets(
-	numberOfMonthsToSubtract, /* helps to define the period */
+    numberOfMonthsToSubtract, /* helps to define the period */
 	0,
 
 	/* Get start and end date */
