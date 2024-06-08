@@ -196,8 +196,8 @@ lets(
 
 # Last Month's Summary
 
-> **Callout:** It excludes the current month entries.
-> If current month is November, it will include October.
+> [!NOTE]
+> It excludes the current month entries. If current month is November, it will include October.
 
 Display Format: `1M: 30,000/- (Food: 10,000/-)`
 
@@ -205,8 +205,8 @@ Same as the [Current Month's Summary Formula](#current-months-summary-formula) w
 
 # Last Quarter's Summary
 
-> **Callout:** It excludes the current month entries.
-> If current month is November, it will include August, September, and October.
+> [!NOTE]
+> It excludes the current month entries. If current month is November, it will include October.
 
 Display Format: `3M: 45,000/- (Food: 15,000/-)`
 
@@ -214,8 +214,8 @@ Same as the [Current Month's Summary Formula](#current-months-summary-formula) w
 
 ## Last 6 Months Summary
 
-> **Callout:** It excludes the current month entries.
-> If current month is November, it will include May, June, July, August, September, and October.
+> [!NOTE]
+> It excludes the current month entries. If current month is November, it will include October.
 
 Display Format: `6M: 90,000/- (Food: 30,000/-)`
 
