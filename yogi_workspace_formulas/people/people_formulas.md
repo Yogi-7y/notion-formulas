@@ -2,7 +2,7 @@
 
 Finance summary include the total expense and the top expense category for the defined period by the relevant person.
 
-For eg, John spent 10k this month and top category is Food with 5k.
+For eg, John spent 15k this month and top category is Food with 5k.
 
 Display Format: `CM: 15,000/- (Food: 5,000/-)`
 
