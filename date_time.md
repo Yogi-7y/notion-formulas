@@ -48,3 +48,15 @@ lets(
   lastDate
 )
 ```
+
+# Date without Time
+
+Returns the date without the time part.
+
+## Example
+
+- If today's date is `2024-01-15 12:30:45`, the output will be `2024-01-15 00:00:00`.
+
+```
+now().formatDate("YYYY-MM-DD").parseDate()
+```
